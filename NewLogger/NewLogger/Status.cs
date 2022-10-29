@@ -8,5 +8,8 @@ namespace NewLogger
 {
     public enum Status
     {
+        Info,
+        Warning,
+        Error
     }
 }

@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewLogger
+namespace NewLogger.Services
 {
-    public class Logger
+    public interface ILogger
     {
+        public void Log(string message, Status status = Status.Info);
     }
 }

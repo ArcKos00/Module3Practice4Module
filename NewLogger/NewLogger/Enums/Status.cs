@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewLogger
+namespace NewLogger.Enums
 {
     public enum Status
     {

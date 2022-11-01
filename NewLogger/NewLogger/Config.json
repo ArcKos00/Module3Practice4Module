@@ -1,4 +1,8 @@
 {
-  "count":  "5",
-  "path": "BBBAAAABBBBAAAAA"
+  "count": "10",
+  "backupPath": "Bababa",
+  "nameLogFile": "log",
+  "logFileType": ".txt",
+  "backupFolder": "Backup",
+  "formatBackupFile": "hh.mm.ss.ffff"
 }

@@ -1,36 +1,50 @@
 ﻿using NewLogger;
 using NewLogger.Services;
 
-var fileService = new FileService();
-var logger = new Logger(fileService);
-var action = new Actions(logger);
-
-logger.NeedBackup += async () => await fileService.BackupAsync();
-
-for (int i = 0; i < 2; i++)
+public class Program
 {
-    await Task.Run(() => Randomise());
-}
-
-await fileService.BackupAsync();
-
-void Randomise()
-{
-    var rand = new Random();
-    for (int i = 0; i < 50; i++)
+    public static async Task Main(string[] args)
     {
-        int random = rand.Next(3);
-        if (random == 0)
+        var fileService = new FileService(new JsonReader().ReadJsonFile());
+        var logger = new Logger(fileService);
+        var action = new Actions(logger);
+        logger.NeedBackup += async () => await fileService.BackupAsync();
+
+        await FORERCH();
+
+        async Task FORERCH()
         {
-            action.Method1();
+            var list = new List<Task>();
+            for (int i = 0; i < 2; i++)
+            {
+                list.Add(Task.Run(async () =>
+                {
+                    for (int i = 0; i < 50; i++)
+                    {
+                        await Randomise(action);
+                    }
+                }));
+            }
+
+            await Task.WhenAll(list);
         }
-        else if (random == 1)
+
+        async Task Randomise(IActions actions)
         {
-            action.Method2();
-        }
-        else
-        {
-            action.Method3();
+            var rand = new Random();
+            var random = rand.Next(3);
+            switch (random)
+            {
+                case 0:
+                    await actions.Method1();
+                    break;
+                case 1:
+                    await actions.Method2();
+                    break;
+                case 2:
+                    await actions.Method3();
+                    break;
+            }
         }
     }
 }

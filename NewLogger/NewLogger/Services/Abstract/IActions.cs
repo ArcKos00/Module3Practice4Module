@@ -8,8 +8,8 @@ namespace NewLogger.Services
 {
     public interface IActions
     {
-        public void Method1();
-        public void Method2();
-        public void Method3();
+        public Task Method1();
+        public Task Method2();
+        public Task Method3();
     }
 }

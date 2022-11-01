@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NewLogger.Enums;
 
 namespace NewLogger.Services
 {
@@ -14,19 +15,19 @@ namespace NewLogger.Services
             _logger = logger;
         }
 
-        public void Method1()
+        public async Task Method1()
         {
-            _logger.Log("Safe start method", Status.Info);
+            await _logger.Log("Safe start method", Status.Info);
         }
 
-        public void Method2()
+        public async Task Method2()
         {
-            _logger.Log("Warning, this method has some errors", Status.Warning);
+            await _logger.Log("Warning, this method has some errors", Status.Warning);
         }
 
-        public void Method3()
+        public async Task Method3()
         {
-            _logger.Log("ERROR", Status.Error);
+            await _logger.Log("ERROR", Status.Error);
         }
     }
 }

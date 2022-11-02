@@ -1,6 +1,6 @@
 {
   "count": "10",
-  "backupPath": "Bababa",
+  "backupPath": "SomePath",
   "nameLogFile": "log",
   "logFileType": ".txt",
   "backupFolder": "Backup",

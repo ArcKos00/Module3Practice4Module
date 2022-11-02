@@ -5,11 +5,7 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
-        // Тут же задание: что метод мейн подписан на событие класса логер...
-        var fileService = new FileService(new JsonReader().ReadJsonFile());
-        var logger = new Logger(fileService);
-        var action = new Actions(logger);
-        logger.NeedBackup += async () => await fileService.BackupAsync();
+        var action = new Actions(new Logger(new FileService(new JsonReader().ReadJsonFile())));
 
         var list = new List<Task>();
         for (int i = 0; i < 2; i++)

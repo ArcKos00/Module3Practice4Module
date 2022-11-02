@@ -16,6 +16,7 @@ namespace NewLogger
         public Logger(IFileService service)
         {
             _service = service;
+            NeedBackup += async () => await _service.BackupAsync();
         }
 
         public event Action? NeedBackup;

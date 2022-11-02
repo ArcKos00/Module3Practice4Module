@@ -5,46 +5,37 @@ public class Program
 {
     public static async Task Main(string[] args)
     {
+        // Тут же задание: что метод мейн подписан на событие класса логер...
         var fileService = new FileService(new JsonReader().ReadJsonFile());
         var logger = new Logger(fileService);
         var action = new Actions(logger);
         logger.NeedBackup += async () => await fileService.BackupAsync();
 
-        await FORERCH();
-
-        async Task FORERCH()
+        var list = new List<Task>();
+        for (int i = 0; i < 2; i++)
         {
-            var list = new List<Task>();
-            for (int i = 0; i < 2; i++)
+            list.Add(Task.Run(async () =>
             {
-                list.Add(Task.Run(async () =>
+                for (int i = 0; i < 50; i++)
                 {
-                    for (int i = 0; i < 50; i++)
+                    var rand = new Random();
+                    var random = rand.Next(3);
+                    switch (random)
                     {
-                        await Randomise(action);
+                        case 0:
+                            await action.Method1();
+                            break;
+                        case 1:
+                            await action.Method2();
+                            break;
+                        case 2:
+                            await action.Method3();
+                            break;
                     }
-                }));
-            }
-
-            await Task.WhenAll(list);
+                }
+            }));
         }
 
-        async Task Randomise(IActions actions)
-        {
-            var rand = new Random();
-            var random = rand.Next(3);
-            switch (random)
-            {
-                case 0:
-                    await actions.Method1();
-                    break;
-                case 1:
-                    await actions.Method2();
-                    break;
-                case 2:
-                    await actions.Method3();
-                    break;
-            }
-        }
+        await Task.WhenAll(list);
     }
 }

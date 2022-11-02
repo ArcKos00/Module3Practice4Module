@@ -21,11 +21,11 @@ namespace NewLogger.Services
         public FileService(Config config)
         {
             _count = config.Count;
-            _backupPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + Path.Combine(config.BackupPath, config.BackupFolder);
             _fileType = config.LogFileType;
             _logFile = config.NameLogFile + config.LogFileType;
             _backupFormat = config.FormatBackupFile;
             _stream = new StreamWriter(_logFile);
+            _backupPath = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + Path.Combine(config.BackupPath, config.BackupFolder);
         }
 
         public int GetCount => _count;
